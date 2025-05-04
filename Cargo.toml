@@ -1,0 +1,11 @@
+[package]
+name = "shame_sdl3"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bytemuck = "1.23"
+naga = { version = "25.0", features = ["wgsl-in", "spv-out"] }
+shame = { git = "https://github.com/RayMarch/shame" }
+sdl3 = { version = "0", features = [] }
+thiserror = "2.0"

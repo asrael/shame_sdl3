@@ -1,3 +1,10 @@
+use std::ffi::NulError;
+
+use naga::WithSpan;
+use naga::back::spv::Error as SpvError;
+use naga::front::wgsl::ParseError;
+use naga::valid::ValidationError;
+use sdl3::Error as SdlError;
 use shame::results::VertexAttribFormat;
 use shame::{EncodingErrors, Indexing, ShaderStage, ThreadIsAlreadyEncoding};
 
@@ -13,8 +20,8 @@ pub enum ShameToSdlError {
     RuntimeSurfaceFormatNotProvided,
 }
 
-impl core::error::Error for ShameToSdlError {}
-impl core::fmt::Display for ShameToSdlError {
+impl std::error::Error for ShameToSdlError {}
+impl std::fmt::Display for ShameToSdlError {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self {
             ShameToSdlError::UnsupportedIndexBufferFormat(format) => {
@@ -68,4 +75,14 @@ pub enum Error {
     ThreadIsAlreadyEncoding(#[from] ThreadIsAlreadyEncoding),
     #[error(transparent)]
     Encoding(#[from] EncodingErrors),
+    #[error(transparent)]
+    NulError(#[from] NulError),
+    #[error(transparent)]
+    ParseError(#[from] ParseError),
+    #[error(transparent)]
+    SdlError(#[from] SdlError),
+    #[error(transparent)]
+    SpvError(#[from] SpvError),
+    #[error(transparent)]
+    ValidationError(#[from] WithSpan<ValidationError>),
 }

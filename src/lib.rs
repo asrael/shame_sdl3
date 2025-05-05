@@ -56,7 +56,8 @@ impl Gpu {
                 colored_error_messages: desc.colored_error_messages,
                 error_excerpt: desc.error_excerpt,
                 shader_identifier_prefix: desc.shader_identifier_prefix,
-                vertex_writable_storage_by_default: desc.vertex_writable_storage_by_default,
+                vertex_writable_storage_by_default: desc
+                    .vertex_writable_storage_by_default,
                 zero_init_workgroup_memory: desc.zero_init_workgroup_memory,
             })?,
             surface_format: self.surface_format,
